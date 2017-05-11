@@ -2,9 +2,18 @@
 
 namespace Loevgaard\Trustpilot\Review;
 
-// @todo add trustpilot review id
 class Review
 {
+    /**
+     * The path where you retrieve a single review, i.e. https://www.trustpilot.com/reviews/4764065d00006400020104b8
+     */
+    const TRUSTPILOT_REVIEW_PATH = '/reviews/%s';
+
+    /**
+     * @var string
+     */
+    private $id;
+
     /**
      * @var string
      */
@@ -31,18 +40,44 @@ class Review
     private $date;
 
     /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @param string $id
      * @param string $title
      * @param string $body
      * @param int $rating
      * @param \DateTime|string $date
+     * @param User $user
      */
-    public function __construct($url, $title, $body, $rating, $date)
+    public function __construct($id, $title, $body, $rating, $date, User $user = null)
     {
-        $this->url = $url;
+        $this->id = $id;
         $this->title = $title;
         $this->body = $body;
         $this->rating = (int)$rating;
         $this->setDate($date);
+        $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     * @return Review
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -50,6 +85,9 @@ class Review
      */
     public function getUrl()
     {
+        if(!$this->url) {
+            $this->url = sprintf(self::TRUSTPILOT_REVIEW_PATH, $this->id);
+        }
         return $this->url;
     }
 
@@ -137,6 +175,24 @@ class Review
             $date = \DateTime::createFromFormat('Y-m-d\TH:i:s.uP', $date);
         }
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return Review
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
         return $this;
     }
 }

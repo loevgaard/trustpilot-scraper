@@ -10,11 +10,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        "fabpot/goutte": "^3.2"
-    },
     "autoload": {
         "psr-4": { "Loevgaard\\Trustpilot\\": "src" }
+    },
+    "require": {
+        "fabpot/goutte": "^3.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7"
