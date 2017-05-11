@@ -15,7 +15,7 @@ Create an instance of `Loevgaard\Trustpilot\Scraper`:
 ```php
 use Loevgaard\Trustpilot\Scraper;
 
-$scraper = new Scraper('www.amazon.com');
+$scraper = new Scraper('www.amazon.com'); // this will scrape https://www.trustpilot.com/review/www.amazon.com
 ```
 
 To get all reviews:
